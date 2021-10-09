@@ -23,8 +23,14 @@ class MyApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
+          inputDecorationTheme:
+              const InputDecorationTheme(border: OutlineInputBorder()),
+          buttonTheme: ButtonThemeData(
+              height: 50.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0))),
           primarySwatch: Colors.red),
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }

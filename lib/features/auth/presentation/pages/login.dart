@@ -35,9 +35,11 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10.0,
               ),
-              ElevatedButton(
-                child: const Text("login"),
-                onPressed: () {},
+              Center(
+                child: ElevatedButton(
+                  child: const Text("Login"),
+                  onPressed: () {},
+                ),
               )
             ],
           ),
