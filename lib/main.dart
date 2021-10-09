@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/pages/login.dart';
+import 'package:flutter_appwrite_1/features/auth/presentation/pages/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0))),
           primarySwatch: Colors.red),
-      home: const LoginPage(),
+      home: const SigninPage(),
     );
   }
 }
