@@ -15,6 +15,16 @@ class AuthState extends ChangeNotifier {
         .setEndpoint(AppConstants.endpoint)
         .setProject(AppConstants.projectId);
     account = Account(client);
+    _checkIsLoggedIn();
+  }
+
+  _checkIsLoggedIn() async {
+    try {
+      var res = await account.get();
+      print(res);
+    } catch (e) {
+      print(e);
+    }
   }
 
   login(String email, String password) async {
