@@ -26,4 +26,14 @@ class AuthState extends ChangeNotifier {
       print(e);
     }
   }
+
+  createAccount(String name, String email, String password) async {
+    try {
+      var result =
+          await account.create(email: email, password: password, name: name);
+      print(result);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

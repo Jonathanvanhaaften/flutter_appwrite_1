@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0))),
             primarySwatch: Colors.red),
-        home: const LoginPage(),
+        home: const SigninPage(),
       ),
     );
   }
