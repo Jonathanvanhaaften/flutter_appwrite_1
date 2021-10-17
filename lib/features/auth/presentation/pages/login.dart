@@ -10,8 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,30 +29,46 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 20.0),
               TextField(
-                controller: _email,
-                decoration: InputDecoration(hintText: "email"),
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: "email"),
               ),
               const SizedBox(height: 10.0),
               TextField(
-                controller: _password,
+                controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(hintText: "password"),
+                decoration: const InputDecoration(hintText: "password"),
               ),
               const SizedBox(
                 height: 10.0,
               ),
-              Center(
-                child: ElevatedButton(
-                  child: const Text("Login"),
-                  onPressed: () {
-                    AuthState state =
-                        Provider.of<AuthState>(context, listen: false);
-                    state.login(_email.text, _password.text);
-                  },
-                ),
-              )
+              ElevatedButton(
+                child: const Text('Login'),
+                onPressed: () async {
+                  final email = _emailController.text;
+                  final password = _passwordController.text;
+                  if (email.isEmpty || password.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Please enter your email and password'),
+                    ));
+                    return;
+                  }
+                  final loggedIn =
+                      await Authstate.instance.login(email, password);
+                  if (loggedIn) {
+                    Navigator.pushReplacementNamed(context, '/home');
+                  }
+                },
+              ),
             ],
           ),
         ));
   }
 }
+ // child: ElevatedButton(
+                //   child: const Text("Login"),
+                //   onPressed: () {
+                //     Authstate state =
+                //         Provider.of<Authstate>(context, listen: false);
+                //     state.login(_email.text, _password.text);
+                //   },
+                // ),
