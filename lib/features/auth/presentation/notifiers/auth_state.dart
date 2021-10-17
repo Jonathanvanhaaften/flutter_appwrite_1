@@ -1,7 +1,7 @@
 import 'package:flutter_appwrite_1/core/res/app_constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
+// import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
 
 // class AuthState extends ChangeNotifier {
 //   Client client = Client();
@@ -146,6 +146,7 @@ class Authstate {
       await account.get();
       return true;
     } on AppwriteException catch (e) {
+      debugPrint(e.toString());
       return false;
     }
   }

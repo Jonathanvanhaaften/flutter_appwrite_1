@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_appwrite_1/features/auth/presentation/pages/login.dart';
+import 'package:flutter_appwrite_1/features/general/presentation/pages/home.dart';
+// import 'package:provider/provider.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({Key? key}) : super(key: key);
@@ -32,18 +34,18 @@ class _SigninPageState extends State<SigninPage> {
               const SizedBox(height: 20.0),
               TextField(
                 controller: _nameController,
-                decoration: InputDecoration(hintText: "name"),
+                decoration: const InputDecoration(hintText: "name"),
               ),
               const SizedBox(height: 10.0),
               TextField(
                 controller: _emailController,
-                decoration: InputDecoration(hintText: "email"),
+                decoration: const InputDecoration(hintText: "email"),
               ),
               const SizedBox(height: 10.0),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(hintText: "password"),
+                decoration: const InputDecoration(hintText: "password"),
               ),
               const SizedBox(
                 height: 10.0,
@@ -67,10 +69,28 @@ class _SigninPageState extends State<SigninPage> {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Account created, login to continue."),
                     ));
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
                   }
                 },
-              )
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ),
+                    );
+                  },
+                  child: const Text("Allready  have and account Login")),
             ],
           ),
         ));

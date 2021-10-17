@@ -24,14 +24,7 @@ class MyApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0))),
           primarySwatch: Colors.red),
-      home: FutureBuilder(
-          future: Authstate.instance.isLoggedIn(),
-          builder: (context, AsyncSnapshot<bool> snapshot) {
-            if (snapshot.hasData && snapshot.data!) {
-              return const SigninPage();
-            }
-            return const LoginPage();
-          }),
+      home: const SigninPage(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/home': (context) => HomePage(),
