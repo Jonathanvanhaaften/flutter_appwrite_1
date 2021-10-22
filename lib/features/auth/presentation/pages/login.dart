@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
 // import 'package:provider/provider.dart';
+import 'package:flutter_appwrite_1/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -55,7 +56,12 @@ class _LoginPageState extends State<LoginPage> {
                   final loggedIn =
                       await Authstate.instance.login(email, password);
                   if (loggedIn) {
-                    Navigator.pushReplacementNamed(context, '/home');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainScreen(),
+                      ),
+                    );
                   }
                 },
               ),

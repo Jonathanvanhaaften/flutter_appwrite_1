@@ -1,90 +1,26 @@
 import 'package:flutter_appwrite_1/core/res/app_constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:appwrite/appwrite.dart';
+import 'package:flutter_appwrite_1/features/auth/data/model/darts.dart';
+import 'package:appwrite/models.dart';
 // import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
-
-// class AuthState extends ChangeNotifier {
-//   Client client = Client();
-//   late Account _account;
-//   late bool _isLoggedIn;
-//   late User _user;
-//   late String _error;
-
-//   Account get account => _account;
-//   bool get isLoggedIn => _isLoggedIn;
-//   User get user => _user;
-//   String get error => _error;
-
-//   AuthState() {
-//     _init();
-//   }
-
-//   _init() {
-//     _isLoggedIn = false;
-//     dynamic _user = null;
-//     account = Account(client);
-//     client
-//         .setEndpoint(AppConstants.endpoint)
-//         .setProject(AppConstants.projectId);
-//     account = Account(client);
-//     _checkIsLoggedIn();
-//   }
-
-//   _checkIsLoggedIn() async {
-//     try {
-//       _user = await _getAccount();
-//       _isLoggedIn = true;
-//       notifyListeners();
-//     } catch (e) {
-//       print(e);
-//     }
-//   }
-
-//   Future<User> _getAccount() async {
-//     try {
-//       var res = await account.get();
-//       if (res.statusCode == 200) {
-//         return User.fromJson(res.data);
-//       } else {
-//         return true;
-//       }
-//     } catch (e) {
-//       throw e;
-//     }
-//   }
-
-//   login(String email, String password) async {
-//     try {
-//       var result =
-//           await account.createSession(email: email, password: password);
-//       print(result);
-//     } catch (e) {
-//       print(e);
-//     }
-//   }
-
-//   createAccount(String name, String email, String password) async {
-//     try {
-//       var result =
-//           await account.create(email: email, password: password, name: name);
-//       print(result);
-//     } catch (e) {
-//       print(e);
-//     }
-//   }
-// }
 
 class Authstate {
   late Client client = Client();
   late Account account;
+  late final Database _db;
+  // late User _user;
 
   Authstate._() {
     client = Client()
         .setEndpoint(AppConstants.endpoint)
         .setProject(AppConstants.projectId);
+
     account = Account(client);
+    _db = Database(client);
   }
 
+  // User get user => _user;
   static final Authstate _instance = Authstate._();
 
   factory Authstate() {
@@ -92,14 +28,6 @@ class Authstate {
   }
 
   static Authstate get instance => _instance;
-
-  // Future<List<Job>> getJobs(BuildContext context) async {
-  //   String data =
-  //       await DefaultAssetBundle.of(context).loadString('assets/jobs.json');
-  //   List<dynamic> json = jsonDecode(data);
-  //   List<Job> jobs = json.map((dynamic item) => Job.fromMap(item)).toList();
-  //   return jobs;
-  // }
 
   Future<bool> login(String email, String password) async {
     try {
@@ -149,5 +77,31 @@ class Authstate {
       debugPrint(e.toString());
       return false;
     }
+  }
+
+  // Future<User> getUser() async {
+  //   final res = await account.get();
+  //   return User.fromMap(res.toMap());
+  // }
+
+  Future<User?> getUser() async {
+    try {
+      return await account.get();
+    } on AppwriteException catch (e) {
+      print(e.message);
+      return null;
+    }
+  }
+
+  Future<SmokedCig> addsmoke(
+      {required SmokedCig cig,
+      required List<String> read,
+      required List<String> write}) async {
+    final res = await _db.createDocument(
+        collectionId: AppConstants.collectionId,
+        data: cig.toMap(),
+        read: read,
+        write: write);
+    return SmokedCig.fromMap(res.data);
   }
 }

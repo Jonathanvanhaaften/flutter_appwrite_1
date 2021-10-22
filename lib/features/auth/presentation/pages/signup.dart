@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/pages/login.dart';
 import 'package:flutter_appwrite_1/features/general/presentation/pages/home.dart';
+import 'package:flutter_appwrite_1/main.dart';
 // import 'package:provider/provider.dart';
 
 class SigninPage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _SigninPageState extends State<SigninPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => MainScreen(),
                       ),
                     );
                   }
@@ -86,7 +87,7 @@ class _SigninPageState extends State<SigninPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => MainScreen(),
                       ),
                     );
                   },
