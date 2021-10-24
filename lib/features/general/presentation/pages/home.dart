@@ -3,7 +3,9 @@ import 'package:flutter_appwrite_1/core/res/app_constants.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter_appwrite_1/features/auth/data/model/darts.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
-import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
+import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/state.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:appwrite/models.dart';
 // class HomePage extends StatelessWidget {
 //   const HomePage({Key? key}) : super(key: key);
 //   @override
@@ -23,8 +25,9 @@ import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
 // }
 
 class HomePage extends StatefulWidget {
-  final User user;
-  const HomePage({Key? key, required this.user}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -37,6 +40,7 @@ class _HomePageState extends State<HomePage> {
   late final Client client;
   final itemsCollection = AppConstants.collectionId;
   late final Database database;
+  late final user;
 
   @override
   void initState() {
@@ -46,8 +50,15 @@ class _HomePageState extends State<HomePage> {
         .setProject(AppConstants.projectId);
 
     database = Database(client);
+    _getUser() async {
+      final user = await Authstate.instance.getUser();
+      if (user != null) {
+        context.read(userProvider).state = user;
+      }
+    }
 
-    // loadItems();
+    user = _getUser();
+    loadItems();
     subscribe();
   }
 
@@ -56,35 +67,35 @@ class _HomePageState extends State<HomePage> {
   void _incrementCounter() async {
     setState(() {
       _counter++;
+      _addItem(_counter);
     });
-    final data = SmokedCig(
-        amount: _counter, date: DateTime.now(), userId: widget.user.id, id: '');
   }
 
   void _decrementCounter() {
     setState(() {
       _counter--;
+      _addItem(_counter);
     });
   }
 
-  // loadItems() async {
-  //   try {
-  //     final res = await database.listDocuments(
-  //         collectionId: itemsCollection, limit: 100);
-  //     setState(() {
-  //       items = List<Map<String, dynamic>>.from(res.data['documents']);
-  //     });
-  //   } on AppwriteException catch (e) {
-  //     print(e.message);
-  //   }
-  // }
+  loadItems() async {
+    try {
+      final res = await database.listDocuments(
+          collectionId: itemsCollection, limit: 100);
+      setState(() {
+        items = List<Map<String, dynamic>>.from(res.documents);
+      });
+    } on AppwriteException catch (e) {
+      print(e.message);
+    }
+  }
 
   void subscribe() {
     final realtime = Realtime(client);
 
-    subscription = realtime.subscribe([
-      'collections.$itemsCollection.documents'
-    ]); //replace <collectionId> with the ID of your items collection, which can be found in your collection's settings page.
+    subscription =
+        realtime.subscribe(['collections.$itemsCollection.documents']);
+    //replace <collectionId> with the ID of your items collection, which can be found in your collection's settings page.
 
     // listen to changes
     subscription!.stream.listen((data) {
@@ -152,15 +163,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _addItem(String name) async {
+  void _addItem(int counter) async {
     try {
-      await database.createDocument(
+      await database.updateDocument(
           collectionId: itemsCollection,
-          data: {'name': name},
+          documentId: '6175e2725169d',
+          data: {'cig_tally': counter},
           read: ['*'],
           write: ['*']);
     } on AppwriteException catch (e) {
-      print(e.message);
+      debugPrint(e.message);
     }
   }
 }
+// createDocument

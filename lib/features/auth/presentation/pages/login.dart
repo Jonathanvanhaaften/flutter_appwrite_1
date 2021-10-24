@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
+import 'package:flutter_appwrite_1/features/general/presentation/pages/home.dart';
 // import 'package:provider/provider.dart';
 import 'package:flutter_appwrite_1/main.dart';
 
@@ -59,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MainScreen(),
+                        builder: (context) => HomePage(),
                       ),
                     );
                   }

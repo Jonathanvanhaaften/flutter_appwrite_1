@@ -73,7 +73,7 @@ class _SigninPageState extends State<SigninPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MainScreen(),
+                        builder: (context) => HomePage(),
                       ),
                     );
                   }
@@ -87,7 +87,7 @@ class _SigninPageState extends State<SigninPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MainScreen(),
+                        builder: (context) => HomePage(),
                       ),
                     );
                   },

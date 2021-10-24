@@ -11,7 +11,7 @@ import 'package:flutter_appwrite_1/features/general/presentation/pages/home.dart
 import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,31 +28,31 @@ class MyApp extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0))),
           primarySwatch: Colors.red),
-      home: MainScreen(),
+      home: LoginPage(),
     );
   }
 }
 
-class MainScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    _getUser() async {
-      final user = await Authstate.instance.getUser();
-      if (user != null) {
-        context.read(userProvider).state = user;
-      }
-    }
+// class MainScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     _getUser() async {
+//       final user = await Authstate.instance.getUser();
+//       if (user != null) {
+//         context.read(userProvider).state = user;
+//       }
+//     }
 
-    return FutureBuilder<User>(
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting)
-          return SigninPage();
-        if (snapshot.hasData) return HomePage(user: snapshot.data!);
-        return LoginPage();
-      },
-    );
-  }
-}
+//     return FutureBuilder<User>(
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.waiting)
+//           return SigninPage();
+//         if (snapshot.hasData) return HomePage(user: snapshot.data!);
+//         return LoginPage();
+//       },
+//     );
+//   }
+// }
 
 // void main() {
 //   runApp(ProviderScope(
