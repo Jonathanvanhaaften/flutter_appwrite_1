@@ -1,28 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appwrite_1/core/res/app_constants.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:flutter_appwrite_1/features/auth/data/model/darts.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:appwrite/models.dart';
-// class HomePage extends StatelessWidget {
-//   const HomePage({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Count to Quit'),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: const <Widget>[],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -63,18 +45,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   int _counter = 0;
+  double _cigCost = 0;
 
   void _incrementCounter() async {
     setState(() {
       _counter++;
-      _addItem(_counter);
+      //Prices of cigarettes is hard coded as (carton = 200 cigs)110.65 as per the price in BC canada on Oct 24 2021
+      _cigCost = _counter * .55;
+      _updateCig(_counter);
     });
   }
 
   void _decrementCounter() {
     setState(() {
       _counter--;
-      _addItem(_counter);
+      _cigCost = _counter * .55;
+      _updateCig(_counter);
     });
   }
 
@@ -95,7 +81,6 @@ class _HomePageState extends State<HomePage> {
 
     subscription =
         realtime.subscribe(['collections.$itemsCollection.documents']);
-    //replace <collectionId> with the ID of your items collection, which can be found in your collection's settings page.
 
     // listen to changes
     subscription!.stream.listen((data) {
@@ -142,6 +127,7 @@ class _HomePageState extends State<HomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text(' \$$_cigCost')
           ],
         ),
       ),
@@ -155,7 +141,7 @@ class _HomePageState extends State<HomePage> {
         ),
         FloatingActionButton(
           onPressed: _decrementCounter,
-          tooltip: 'Increment',
+          tooltip: 'decrese a smoke',
           child: const Icon(Icons.remove),
           heroTag: null,
         ),
@@ -163,7 +149,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _addItem(int counter) async {
+// adding of
+  void _updateCig(int counter) async {
     try {
       await database.updateDocument(
           collectionId: itemsCollection,
@@ -176,4 +163,3 @@ class _HomePageState extends State<HomePage> {
     }
   }
 }
-// createDocument
