@@ -2,7 +2,7 @@
 An app demo to help you quit smoking. 
 It is a simple app demo built with Appwrite for Hacktoberfest 2021.
 
-You count your cigarettes per day, and the cost and is saved in an appwrite document.
+You count your cigarettes per day, and the cost and is saved in an appwrite document. This can be a rewarding way to cut down on your cigarette consumption with the goal of quitting.
 As of right now the cost is based on the cost per carton in BC, Canada. A future feature - the user could add the brand and prices in their area.
 
 A lot of this project is Frankensteined from the tutorials [React Bits (Damodar Lohani)](https://www.youtube.com/c/ReactBits) YouTube page - an amazing help. If you're looking to 
