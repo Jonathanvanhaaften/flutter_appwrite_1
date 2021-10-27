@@ -11,15 +11,19 @@ import 'package:flutter_appwrite_1/features/general/presentation/pages/home.dart
 import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({
+    Key? key,
+  }) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Appwrite demo Count too quit',
       theme: ThemeData(
           inputDecorationTheme:
               const InputDecorationTheme(border: OutlineInputBorder()),
@@ -27,8 +31,8 @@ class MyApp extends StatelessWidget {
               height: 50.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0))),
-          primarySwatch: Colors.red),
-      home: LoginPage(),
+          primarySwatch: Colors.blue),
+      home: const LoginPage(),
     );
   }
 }

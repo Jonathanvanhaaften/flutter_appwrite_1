@@ -3,13 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter_appwrite_1/features/auth/data/model/darts.dart';
 import 'package:appwrite/models.dart';
-// import 'package:flutter_appwrite_1/features/auth/data/model/user.dart';
 
 class Authstate {
   late Client client = Client();
   late Account account;
   late final Database _db;
-  // late User _user;
 
   Authstate._() {
     client = Client()
@@ -20,7 +18,6 @@ class Authstate {
     _db = Database(client);
   }
 
-  // User get user => _user;
   static final Authstate _instance = Authstate._();
 
   factory Authstate() {
@@ -79,20 +76,17 @@ class Authstate {
     }
   }
 
-  // Future<User> getUser() async {
-  //   final res = await account.get();
-  //   return User.fromMap(res.toMap());
-  // }
-
   Future<User?> getUser() async {
     try {
       return await account.get();
     } on AppwriteException catch (e) {
-      print(e.message);
+      debugPrint(e.message);
       return null;
     }
   }
 
+//this has been made redundant fuction ment to take the model of SmokedCig in dart.dart to update,add, and create documents
+// within the appwrite dattabase
   Future<SmokedCig> addsmoke(
       {required SmokedCig cig,
       required List<String> read,

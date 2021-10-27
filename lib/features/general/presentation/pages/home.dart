@@ -4,6 +4,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:appwrite/models.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,10 +41,12 @@ class _HomePageState extends State<HomePage> {
     }
 
     user = _getUser();
-    loadItems();
+    // loadItems();
     subscribe();
   }
 
+  final Widget svg = SvgPicture.asset('images/built-with-appwrite.svg',
+      semanticsLabel: 'Acme Logo');
   int _counter = 0;
   double _cigCost = 0;
 
@@ -63,18 +66,22 @@ class _HomePageState extends State<HomePage> {
       _updateCig(_counter);
     });
   }
+//  final String assetName = 'images/built-with-appwrite.svg';
+//  final Widget svg = SvgPicture.asset(
+//            assetName,
+//             semanticsLabel: 'Acme Logo')
 
-  loadItems() async {
-    try {
-      final res = await database.listDocuments(
-          collectionId: itemsCollection, limit: 100);
-      setState(() {
-        items = List<Map<String, dynamic>>.from(res.documents);
-      });
-    } on AppwriteException catch (e) {
-      print(e.message);
-    }
-  }
+  // loadItems() async {
+  //   try {
+  //     final res = await database.listDocuments(
+  //         collectionId: itemsCollection, limit: 100);
+  //     setState(() {
+  //    items = List<Map<String, dynamic>>.from(res.documents);
+  //     });
+  //   } on AppwriteException catch (e) {
+  //     print(e.message);
+  //   }
+  // }
 
   void subscribe() {
     final realtime = Realtime(client);
@@ -127,7 +134,13 @@ class _HomePageState extends State<HomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            Text(' \$$_cigCost')
+            Text(' \$$_cigCost'),
+            const SizedBox(
+              height: 200.0,
+            ),
+            LimitedBox(
+              child: svg,
+            ),
           ],
         ),
       ),

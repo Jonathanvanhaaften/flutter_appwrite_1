@@ -1,5 +1,8 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_appwrite_1/features/auth/presentation/notifiers/auth_state.dart';
+import 'package:flutter_appwrite_1/features/auth/presentation/pages/signup.dart';
 import 'package:flutter_appwrite_1/features/general/presentation/pages/home.dart';
 // import 'package:provider/provider.dart';
 import 'package:flutter_appwrite_1/main.dart';
@@ -60,22 +63,26 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => const HomePage(),
                       ),
                     );
                   }
                 },
               ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              ElevatedButton(
+                  child: const Text('Sign Up'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SigninPage()),
+                    );
+                  })
             ],
           ),
         ));
   }
 }
- // child: ElevatedButton(
-                //   child: const Text("Login"),
-                //   onPressed: () {
-                //     Authstate state =
-                //         Provider.of<Authstate>(context, listen: false);
-                //     state.login(_email.text, _password.text);
-                //   },
-                // ),
