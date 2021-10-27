@@ -6,7 +6,7 @@ you count your smokes per day
 and cost 
 
 as of right now the cost is based on the cost per carton in BC Canada a future feature the user could add the brand and prices in his area.
-![Login Page](./images/login.png)
+![Login Page](flutter_appwrite_1/images/login.png)
 
 
   <img src="https://images/login.png" width="350" title="hover text">
