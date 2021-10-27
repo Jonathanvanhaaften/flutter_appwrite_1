@@ -1,4 +1,4 @@
-This Is my first flutter app
+##This Is my first flutter app with Appwite
 an app to help you quit smoking 
 it is a simple app built with appwrite for Hacktoberfest 2021
 
@@ -7,3 +7,9 @@ and cost
 
 as of right now the cost is based on the cost per carton in BC Canada a future feature the user could add the brand and prices in his area.
 ![Login Page](./images/login.png)
+
+
+<p align="center">
+  <img src="./images/login.png" width="350" title="hover text">
+  <img src="./images/signin.png" width="350" alt="accessibility text">
+</p>
