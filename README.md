@@ -1,12 +1,12 @@
 ## This Is my first flutter app with Appwite
-An app demo to help you quit smoking 
-it is a simple app demo built with appwrite for Hacktoberfest 2021
+An app demo to help you quit smoking. 
+It is a simple app demo built with Appwrite for Hacktoberfest 2021.
 
-You count your smokes per day and the cost and is saved in an appwrite document.
-As of right now the cost is based on the cost per carton in BC Canada a future feature the user could add the brand and prices in his area.
+You count your cigarettes per day, and the cost and is saved in an appwrite document.
+As of right now the cost is based on the cost per carton in BC, Canada. A future feature - the user could add the brand and prices in their area.
 
-A lot of this project is frankensteined from the tutorials [React Bits (Damodar Lohani)](https://www.youtube.com/c/ReactBits) youtube page an amazing help and if your looking to 
-learn flutter and appwrite a top resource on both subjects
+A lot of this project is Frankensteined from the tutorials [React Bits (Damodar Lohani)](https://www.youtube.com/c/ReactBits) YouTube page - an amazing help. If you're looking to 
+learn Flutter and Appwrite it's a top resource on both subjects.
 
 
 ### Login page logins into a user profile in the appwrite backend
