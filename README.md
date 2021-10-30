@@ -21,3 +21,6 @@ learn Flutter and Appwrite it's a top resource on both subjects.
 ### Home page updated with the updated appwrite database
 
 <img src="./images/home_addSmoke.png" width="200" height="400" />
+
+I also wrote a blog about my experience 
+[What I learned by creating a Appwrite + Flutter demo](https://dev.to/jonathanvanhaaften/what-i-learned-by-creating-a-appwrite-flutter-demo-51ce)
